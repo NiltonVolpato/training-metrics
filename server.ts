@@ -55,7 +55,8 @@ function parseCSV(filePath: string) {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = parseInt(process.env.PORT || '3000', 10);
+  const HOST = process.env.HOST || '0.0.0.0';
 
   // SSE endpoint
   app.get('/api/metrics/stream', (req, res) => {
@@ -107,8 +108,9 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  app.listen(PORT, HOST, () => {
+    console.log(`Server running on http://${HOST === '0.0.0.0' ? 'localhost' : HOST}:${PORT}`);
+    console.log(`Network access: http://<your-ip-address>:${PORT}`);
   });
 }
 
