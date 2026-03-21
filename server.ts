@@ -3,10 +3,10 @@ import { createServer as createViteServer } from 'vite';
 import fs from 'fs';
 import path from 'path';
 
-const METRICS_FILE = path.join(process.cwd(), 'metrics.csv');
+const METRICS_FILE = process.env.CSV_FILE_PATH || path.join(process.cwd(), 'metrics.csv');
 
-// Ensure the file exists initially with sample data
-if (!fs.existsSync(METRICS_FILE)) {
+// Ensure the file exists initially with sample data (only if using the default file)
+if (!process.env.CSV_FILE_PATH && !fs.existsSync(METRICS_FILE)) {
   fs.writeFileSync(METRICS_FILE, `global_step,fidelity,loss,lr
 # Epoch 9 start
 3450,nan,0.148533,4.173464e-05
