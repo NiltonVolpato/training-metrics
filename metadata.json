@@ -1,0 +1,5 @@
+{
+  "name": "Model Training Metrics Watcher",
+  "description": "An application that watches a CSV file for model training metrics and displays them in a real-time graph.",
+  "requestFramePermissions": []
+}
